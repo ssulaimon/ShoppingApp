@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -5,6 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:test_app/api_calls/data_model.dart';
 import 'package:test_app/providermodel/add_to_cart.dart';
+import 'package:test_app/ui/payment_ui.dart';
 
 class CheckOut extends StatefulWidget {
   const CheckOut({Key? key}) : super(key: key);
@@ -24,6 +27,7 @@ class _CheckOutState extends State<CheckOut> {
             sum = sum + element.price;
           },
         );
+        // cartItems.totalPrice = sum;
         return Scaffold(
           appBar: AppBar(
             title: const Text('Check out'),
@@ -92,7 +96,15 @@ class _CheckOutState extends State<CheckOut> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     FlatButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        cartItems.totalPrice = sum;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const PaymentUi(),
+                          ),
+                        );
+                      },
                       color: const Color(0xFFEDBF69),
                       child: const Text(
                         'Check out',
