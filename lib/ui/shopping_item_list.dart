@@ -1,14 +1,14 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:provider/provider.dart';
 import 'package:test_app/api_calls/api.dart';
 import 'package:test_app/api_calls/data_model.dart';
 import 'package:test_app/providermodel/add_to_cart.dart';
 import 'package:test_app/ui/checkout.dart';
+import 'package:test_app/ui/product_details.dart';
+import 'package:test_app/ui/rating_star.dart';
 
 class ShoppingList extends StatelessWidget {
   const ShoppingList({Key? key}) : super(key: key);
@@ -104,68 +104,34 @@ class ShoppingList extends StatelessWidget {
                                   child: Text(
                                       '\$${items[index].price.toString()}')),
                               items[index].rating < 4.60
-                                  ? Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: const [
-                                        Icon(
-                                          Icons.star,
-                                          color: Color(0xFFFFD700),
-                                          size: 15,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: Color(0xFFFFD700),
-                                          size: 15,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: Color(0xFFFFD700),
-                                          size: 15,
-                                        ),
-                                      ],
+                                  ? const Center(
+                                      child: RatingStar(),
                                     )
-                                  : Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: const [
-                                        Icon(
-                                          Icons.star,
-                                          color: Color(0xFFFFD700),
-                                          size: 15,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: Color(0xFFFFD700),
-                                          size: 15,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: Color(0xFFFFD700),
-                                          size: 15,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: Color(0xFFFFD700),
-                                          size: 15,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: Color(0xFFFFD700),
-                                          size: 15,
-                                        ),
-                                      ],
+                                  : const Center(
+                                      child: FiveStar(),
                                     ),
                               Flexible(
                                 child: FlatButton(
                                   onPressed: () {
+                                    var snackBar = SnackBar(
+                                      content: Text(
+                                        '${items[index].title} add to your cart',
+                                      ),
+                                      elevation: 4.0,
+                                      behavior: SnackBarBehavior.floating,
+                                    );
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
                                     cartItem.addToCartList(
                                       item: items[index],
                                     );
                                   },
-                                  color: Colors.yellow,
+                                  color: const Color(0xFFEDBF69),
                                   child: const Text(
                                     'Add to cart',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               )
@@ -173,7 +139,13 @@ class ShoppingList extends StatelessWidget {
                           ),
                         ),
                         onTap: () {
-                          log('clicked me');
+                          cartItem.item = items[index];
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ProductDetails(),
+                            ),
+                          );
                         },
                       ),
                     );
