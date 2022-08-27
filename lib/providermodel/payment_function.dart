@@ -6,7 +6,6 @@ import 'package:lecle_downloads_path_provider/lecle_downloads_path_provider.dart
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
-import 'package:test_app/providermodel/payment.details.dart';
 
 class PaymentFuction {
   Future<String?> paymentDetails({

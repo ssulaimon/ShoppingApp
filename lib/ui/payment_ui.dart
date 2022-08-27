@@ -1,13 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 import 'package:test_app/providermodel/add_to_cart.dart';
-import 'package:test_app/providermodel/payment.details.dart';
 import 'package:test_app/providermodel/payment_function.dart';
 import 'package:test_app/ui/mastercard_desgin.dart';
-
 import '../api_calls/data_model.dart';
 
 class PaymentUi extends StatelessWidget {
