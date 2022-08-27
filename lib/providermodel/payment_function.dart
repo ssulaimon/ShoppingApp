@@ -21,17 +21,6 @@ class PaymentFuction {
     required String items,
   }) async {
     try {
-      PaymentDetails payment = PaymentDetails(
-        amountPaid: amountPaid,
-        cardNumber: cardNumber,
-        cvv: cvv,
-        date: date,
-        expMonth: expMonth,
-        expYear: expYear,
-        name: name,
-        itemNumber: itemNumber,
-      );
-
       var pdf = Document();
       pdf.addPage(
         Page(
